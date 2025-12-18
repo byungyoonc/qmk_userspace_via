@@ -19,7 +19,7 @@
 #include QMK_KEYBOARD_H
 
 enum custom_keycodes {
-    KC_SEC1 = SAFE_RANGE,
+    KC_SEC1 = QK_KB_0,
     KC_SEC2,
     OS_SHFT,
     OS_CTRL,
