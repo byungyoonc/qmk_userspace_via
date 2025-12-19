@@ -1,0 +1,6 @@
+#define USB_POLLING_INTERVAL_MS 1
+#ifdef DEBOUNCE
+#undef DEBOUNCE
+#endif
+#define DEBOUNCE 40
+#define NO_ACTION_ONESHOT
