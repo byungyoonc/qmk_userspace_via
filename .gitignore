@@ -9,3 +9,7 @@
 *.hex
 *.bin
 *.uf2
+
+# Cache files
+.cache/**
+compile_commands.json
