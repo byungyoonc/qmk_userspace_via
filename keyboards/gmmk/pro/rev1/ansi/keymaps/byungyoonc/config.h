@@ -1,0 +1,11 @@
+#pragma once
+
+#ifdef DYNAMIC_KEYMAP_LAYER_COUNT
+#undef DYNAMIC_KEYMAP_LAYER_COUNT
+#endif
+#define DYNAMIC_KEYMAP_LAYER_COUNT 4
+
+#ifdef DEBOUNCE
+#undef DEBOUNCE
+#endif
+#define DEBOUNCE 40
