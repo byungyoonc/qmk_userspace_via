@@ -1,0 +1,83 @@
+// Copyright 2023 Choi Byungyoon (byungyoonc@gmail.com)
+// SPDX-License-Identifier: GPL-2.0-or-later
+
+#include QMK_KEYBOARD_H
+#include "byungyoonc.h"
+
+enum layers {
+  _QWERTY,
+  _NUM,
+  _MMO,
+  _MMOF,
+  _SYMBOL,
+  _ADJUST,
+};
+
+#define NUM MO(_NUM)
+#define MMO MO(_MMO)
+#define MMOF MO(_MMOF)
+#define SYMBOL MO(_SYMBOL)
+#define ADJUST MO(_ADJUST)
+#define AGRGUI LGUI_T(KC_RALT)
+
+const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
+
+/* Qwerty */
+    [_QWERTY] = LAYOUT_planck_mit(
+    KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSPC,
+    KC_LCTL, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_ENT,
+    KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_UP,   KC_RSFT,
+    MMO,     XXXXXXX, XXXXXXX, KC_LALT, NUM,          KC_SPC,      SYMBOL,  AGRGUI,  KC_LEFT, KC_DOWN, KC_RGHT
+    ),
+
+/* Num */
+[_NUM] = LAYOUT_planck_mit(
+    KC_F1,   KC_HOME, KC_UP,   KC_END,  KC_PGUP, KC_CAPS, KC_NUM,  KC_7   , KC_8   , KC_9   , KC_PMNS, KC_DEL,
+    _______, KC_LEFT, KC_DOWN, KC_RGHT, KC_PGDN, XXXXXXX, XXXXXXX, KC_4   , KC_5   , KC_6   , KC_PPLS, _______,
+    _______, KC_ESC,  XXXXXXX, XXXXXXX, XXXXXXX, KC_APP,  XXXXXXX, KC_1   , KC_2   , KC_3   , KC_PDOT, _______,
+    MMOF,    _______, _______, _______, _______,      KC_0,        ADJUST,  _______, _______, _______, _______
+),
+
+/* MMO */
+[_MMO] = LAYOUT_planck_mit(
+    KC_ESC,  KC_1,    KC_2,    KC_3,    KC_EQL,  _______, _______, _______, _______, _______, _______, _______,
+    _______, KC_4,    KC_5,    KC_6,    KC_MINS, _______, _______, _______, _______, _______, _______, _______,
+    _______, KC_7,    KC_8,    KC_9,    KC_0,    _______, _______, _______, _______, _______, _______, _______,
+    _______, _______, _______, _______, MMOF,         _______,     _______, _______, _______, _______, _______
+),
+
+/* MMO-F */
+[_MMOF] = LAYOUT_planck_mit(
+    KC_ESC,  KC_F1,   KC_F2,   KC_F3,   KC_F12,  _______, _______, _______, _______, _______, _______, _______,
+    _______, KC_F4,   KC_F5,   KC_F6,   KC_F11,  _______, _______, _______, _______, _______, _______, _______,
+    _______, KC_F7,   KC_F8,   KC_F9,   KC_F10,  _______, _______, _______, _______, _______, _______, _______,
+    _______, _______, _______, _______, _______,      _______,     _______, _______, _______, _______, _______
+),
+
+/* Symbol */
+[_SYMBOL] = LAYOUT_planck_mit(
+    KC_GRV,  KC_EXLM, KC_AT,   KC_HASH, KC_PERC, KC_ASTR, XXXXXXX, KC_LPRN, KC_RPRN, KC_MINS, KC_EQL,  KC_DEL,
+    _______, KC_AMPR, KC_ASTR, KC_DLR,  XXXXXXX, XXXXXXX, XXXXXXX, KC_LBRC, KC_RBRC, KC_BSLS, KC_QUOT, _______,
+    _______, XXXXXXX, KC_CIRC, KC_CIRC, XXXXXXX, KC_APP,  XXXXXXX, XXXXXXX, _______, _______, KC_SLSH, _______,
+    _______, _______, _______, _______, ADJUST,       _______,     _______, _______, _______, _______, _______
+),
+
+/* Adjust */
+[_ADJUST] = LAYOUT_planck_mit(
+    _______, XXXXXXX, KC_MPRV, KC_MPLY, KC_MNXT, KC_SCRL, KC_VOLU, KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_PSCR,
+    _______, KC_SEC1, KC_SEC2, XXXXXXX, XXXXXXX, XXXXXXX, KC_VOLD, KC_F4,   KC_F5,   KC_F6,   KC_F11,  _______,
+    _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_MUTE, KC_F1,   KC_F2,   KC_F3,   KC_F12,  _______,
+    _______, _______, _______, _______, _______,      QK_BOOT,     _______, _______, NK_TOGG, DB_TOGG, XXXXXXX
+),
+};
+
+
+const key_override_t pmns_key_override = ko_make_basic(MOD_MASK_SHIFT, KC_PMNS, KC_PSLS);
+const key_override_t ppls_key_override = ko_make_basic(MOD_MASK_SHIFT, KC_PPLS, KC_PAST);
+const key_override_t up_key_override = ko_make_with_layers(MOD_BIT(KC_RSFT), KC_UP, KC_QUES, (1 << _QWERTY));
+
+const key_override_t *key_overrides[] = {
+    &pmns_key_override,
+    &ppls_key_override,
+    &up_key_override
+};
