@@ -1,0 +1,8 @@
+KEY_OVERRIDE_ENABLE = yes
+CUSTOM_MATRIX = yes
+
+SRC += matrix.c
+
+VIA_ENABLE = yes
+LTO_ENABLE = yes
+MOUSEKEY_ENABLE = no
