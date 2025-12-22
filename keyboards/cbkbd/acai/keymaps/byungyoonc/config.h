@@ -9,3 +9,6 @@
 #undef DEBOUNCE
 #endif
 #define DEBOUNCE 40
+
+#define RGB_MATRIX_KEYHOLDS
+#define LED_HITS_TO_REMEMBER 40
